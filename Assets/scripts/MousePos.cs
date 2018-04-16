@@ -12,8 +12,25 @@ public class MousePos : MonoBehaviour {
     public GameObject objHit;
     public Vector3 pos;
 
-	// Update is called once per frame
-	void Update () {
+    public Color upColor = Color.red;
+    public Color downColor = Color.green;
+
+    private void Start()
+    {
+        indicator.GetComponentInChildren<SpriteRenderer>().color = upColor;
+    }
+
+
+    // Update is called once per frame
+    void Update () {
+
+        //Update sprite color;
+        if (Input.GetMouseButtonDown(0))
+            indicator.GetComponentInChildren<SpriteRenderer>().color = downColor;
+        if (Input.GetMouseButtonUp(0))
+            indicator.GetComponentInChildren<SpriteRenderer>().color = upColor;
+
+        //DO THE RAYCAST
         ray = cam.ScreenPointToRay(Input.mousePosition);
 
         //Debug.Log(LayerMask.LayerToName(8));
