@@ -9,7 +9,7 @@ public class MousePos : MonoBehaviour {
     Ray ray;
 
     RaycastHit hit;
-    Transform objHit;
+    public GameObject objHit;
     public Vector3 pos;
 
 	// Update is called once per frame
@@ -20,9 +20,10 @@ public class MousePos : MonoBehaviour {
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            objHit = hit.transform;
+            objHit = hit.transform.gameObject;
             pos = hit.point;
             //Debug.Log(ray.origin + "\n" + pos);
+            //Debug.Log(objHit);
 
             //Debug.DrawLine(ray.origin, hit.point);
 
@@ -30,6 +31,9 @@ public class MousePos : MonoBehaviour {
             //indicator.transform.position += new Vector3(0, 1, 0);
             //Debug.Log("raycast success"); 
         }
-        //else { Debug.Log("raycast fail"); }
+        else {
+            objHit = null;
+            //Debug.Log("raycast fail");
+        }
     }
 }

@@ -66,6 +66,11 @@ public class Explosive : MonoBehaviour {
             GetComponent<Explodable>().Explode();
     }
 
+    public void OnDestroy()
+    {
+        
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - StartExplode
+  - Ground
+  - Bomb
   layers:
   - Default
   - TransparentFX
