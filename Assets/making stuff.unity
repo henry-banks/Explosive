@@ -142,21 +142,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placeableObjects:
   - displayName: Start Bomb
-    id: 0
     idx: 0
     obj: {fileID: 1576602970179872, guid: 6dd10bb090f5c1541ae278fc0c6db821, type: 2}
     maxUsed: 5
     currentUsed: 0
     thumbnail: {fileID: 0}
   - displayName: Basic Bomb
-    id: 0
     idx: 0
     obj: {fileID: 1608302201309978, guid: cbf93be9504a63546930068961b56b9c, type: 2}
     maxUsed: 10
     currentUsed: 0
     thumbnail: {fileID: 0}
   - displayName: Barrel
-    id: 0
     idx: 0
     obj: {fileID: 1980086429967524, guid: d62d88e7e4feac4498b48a46a31a97b9, type: 2}
     maxUsed: 20
@@ -1219,7 +1216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc737a301388fd4ea1abf16a2ffc3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1829725943}
   levelManager: {fileID: 87981985}
   buttonTemplate: {fileID: 1291316543201576, guid: d6354d68a77db4e46bbf71b1eaf8a7bc,
     type: 2}
@@ -1265,3 +1261,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thingToPlace: {fileID: 1576602970179872, guid: 6dd10bb090f5c1541ae278fc0c6db821,
     type: 2}
+  thingIdx: 0
+  levelManager: {fileID: 0}

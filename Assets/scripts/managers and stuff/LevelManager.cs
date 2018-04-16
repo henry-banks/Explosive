@@ -4,15 +4,16 @@ using UnityEngine;
 
 //Info about a certain type of object
 [System.Serializable]
-public struct ObjLevelData
+public class ObjLevelData
 {
     public string displayName;
-    public int id;
     public int idx;
     public GameObject obj;
     public int maxUsed;
     public int currentUsed;
     public Texture2D thumbnail;
+
+    public int remaining { get { return maxUsed - currentUsed; } }
 }
 
 
@@ -22,13 +23,21 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        GameManager.Instance.levelManager = this;
+        for (int i = 0; i < placeableObjects.Count; i++)
+            placeableObjects[i].idx = i;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+
+    public void setObjUsed(int idx, int num)
+    {
+        placeableObjects[idx].currentUsed = num;
+    }
 
     public void OnExplode(Explodable exp)
     {

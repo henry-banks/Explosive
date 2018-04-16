@@ -9,10 +9,17 @@ public class Explodable : MonoBehaviour {
     public bool hasExploded = false;
     public float explosionEffectScale = 1;
 
+    public ObjLevelData data;
+    private LevelManager level;
 
-	// Use this for initialization
-	void Start () {
-		
+    private void OnDestroy()
+    {
+        level.placeableObjects[data.idx].currentUsed--;
+    }
+
+    // Use this for initialization
+    void Start () {
+        level = GameManager.Instance.levelManager;
 	}
 	
 	// Update is called once per frame

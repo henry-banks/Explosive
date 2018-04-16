@@ -15,12 +15,17 @@ public class CircleDraw : MonoBehaviour {
         line = GetComponent<LineRenderer>();
 
         line.positionCount = segments+1;
-        line.useWorldSpace = false;
+        line.useWorldSpace = true;
         //line.startWidth
+        //CreatePoints();
+    }
+
+    private void Update()
+    {
         CreatePoints();
     }
-	
-	void CreatePoints()
+
+    void CreatePoints()
     {
         float x, z;
         float angle = 20f;
@@ -30,7 +35,7 @@ public class CircleDraw : MonoBehaviour {
             x = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
             z = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
 
-            line.SetPosition(i, new Vector3(x, 0, z));
+            line.SetPosition(i, new Vector3(x + transform.position.x, 0, z + transform.position.z));
 
             angle += (360f / segments);
         }

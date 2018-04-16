@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class uiBombSelect : MonoBehaviour {
 
-    public GameManager manager;
-    public GameObject obj;
+    public ObjLevelData objData;
 
 	public void onClicked()
     {
-        manager.thingToPlace = obj;
+        GameManager.Instance.thingToPlace = objData.obj;
+        GameManager.Instance.thingIdx = objData.idx;
     }
 }

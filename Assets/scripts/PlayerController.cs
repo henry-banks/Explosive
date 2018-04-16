@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        manager = GameManager.Instance;
 	}
 
     // Update is called once per frame
@@ -36,10 +36,18 @@ public class PlayerController : MonoBehaviour {
 
     public void PlaceObject()
     {
-        Transform place = mouse.indicator.gameObject.transform;
-        //+ new Vector3(0,2,0)
-        Instantiate(manager.thingToPlace, place.position, new Quaternion());
-        Debug.Log("spawned " + manager.thingToPlace.name);
+        ObjLevelData data = manager.levelManager.placeableObjects[manager.thingIdx];
+        if (data.currentUsed < data.maxUsed)
+        {
+            //increment number of things used;
+            data.currentUsed++;
+            Transform place = mouse.indicator.gameObject.transform;
+            //+ new Vector3(0,2,0)
+            GameObject thing = Instantiate(manager.thingToPlace, place.position, new Quaternion());
+            thing.GetComponent<Explodable>().data = data;
+            Debug.Log("spawned " + manager.thingToPlace.name);
+        }
+        else Debug.Log("Not enough" + manager.thingToPlace.name);
     }
 
 }
