@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4228636942982134}
   - component: {fileID: 33242165150238304}
   - component: {fileID: 136275466023035502}
+  - component: {fileID: 64179104017584500}
   - component: {fileID: 23535106501495758}
   - component: {fileID: 54408390446997730}
   - component: {fileID: 114008337324354308}
@@ -100,6 +101,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &64179104017584500
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980086429967524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &114008337324354308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +128,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 1620702439373540, guid: 2fc61f4ea22eb8a4da7e259d130174c2, type: 2}
   hasExploded: 0
+  destroyOnExplode: 1
   explosionEffectScale: 0.5
+  data:
+    displayName: 
+    idx: 0
+    obj: {fileID: 0}
+    maxUsed: 0
+    currentUsed: 0
+    thumbnail: {fileID: 0}
 --- !u!136 &136275466023035502
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -122,7 +145,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1980086429967524}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

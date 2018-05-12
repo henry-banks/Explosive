@@ -6,19 +6,18 @@ public class SlowDown : ExplosionEffect {
 
     //Percentage from 0-100.  100 means total freeze.
     public float slowAmount;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public float slowTime;
 
     public override void Effect()
     {
-        
+
+        foreach(Collider e in explosive.explosionObjs)
+        {
+            if(e.GetComponent<Explodable>())
+            {
+                e.GetComponent<Rigidbody>().drag = slowAmount;
+                e.GetComponent<Explodable>().SlowDown(slowAmount, slowTime);
+            }
+        }
     }
 }

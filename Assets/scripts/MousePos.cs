@@ -44,9 +44,17 @@ public class MousePos : MonoBehaviour {
 
             //Debug.DrawLine(ray.origin, hit.point);
 
-            indicator.transform.position = new Vector3(pos.x, indicator.transform.position.y, pos.z);
+            //indicator.transform.position = new Vector3(pos.x, indicator.transform.position.y, pos.z);
+            indicator.transform.position = new Vector3(pos.x, pos.y, pos.z);
             //indicator.transform.position += new Vector3(0, 1, 0);
             //Debug.Log("raycast success"); 
+
+            Ray downRay = new Ray(indicator.transform.position + new Vector3(0, 100000, 0), new Vector3(0, -1, 0));
+            RaycastHit downHit;
+            Physics.Raycast(downRay, out downHit, Mathf.Infinity);
+
+            indicator.transform.position = new Vector3(pos.x, downHit.point.y, pos.z);
+
         }
         else {
             objHit = null;

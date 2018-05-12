@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Variables that are modified by various explosion effects
+public struct ExplodableData
+{
+    //Speed at which the object moves, either by itself or from being blown away.
+    float moveSpeed;
+
+
+}
+
 public class Explodable : MonoBehaviour {
 
     public GameObject explosion;
     //Used to prevent infinite loop in Explodable/Explosive explosions
     public bool hasExploded = false;
+
+    //Set true if you wish this object to be destroyed when it explodes
+    public bool destroyOnExplode = true;
     public float explosionEffectScale = 1;
 
     public ObjLevelData data;
     private LevelManager level;
+
+    public ExplodableData explodableData;
 
     private void OnDestroy()
     {
@@ -29,9 +43,11 @@ public class Explodable : MonoBehaviour {
 
     public void Explode(float preDelay = 0)
     {
-        StartCoroutine(delay(preDelay));        
+        StartCoroutine(delayExplode(preDelay));        
     }
-    private IEnumerator delay(float sec)
+
+
+    private IEnumerator delayExplode(float sec)
     {
         yield return new WaitForSeconds(sec);
 
@@ -42,6 +58,25 @@ public class Explodable : MonoBehaviour {
 
         GameObject g = Instantiate(explosion, transform.position, transform.rotation);
         g.transform.localScale *= explosionEffectScale;
-        Destroy(gameObject);
+
+        if (destroyOnExplode)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void SlowDown(float slowAmount, float slowCooldown)
+    {
+        Rigidbody r = GetComponent<Rigidbody>();
+        float originalDrag = r.drag;
+        r.drag = slowAmount;
+
+        StartCoroutine(generalDelay(slowCooldown));
+
+        r.drag = originalDrag;
+    }
+    private IEnumerator generalDelay(float wait)
+    {
+        yield return new WaitForSeconds(wait);
     }
 }

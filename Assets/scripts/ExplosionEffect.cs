@@ -5,11 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Explodable))]
 public abstract class ExplosionEffect : MonoBehaviour {
 
-    public Explodable explodable;
+    public Explosive explosive;
 
 	// Use this for initialization
 	void Start () {
-        explodable = GetComponent<Explodable>();
+        explosive = GetComponent<Explosive>();
 	}
 
     public abstract void Effect();

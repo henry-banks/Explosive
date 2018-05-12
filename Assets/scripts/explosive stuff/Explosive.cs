@@ -17,6 +17,12 @@ public class Explosive : MonoBehaviour {
     //Used to prevent infinite loop in Explodable/Explosive explosions
     public bool hasExploded = false;
 
+    //All effects that this explosive executes when it explodes.
+    ExplosionEffect[] effects;
+
+    //All objects caught in the explosion.
+    public Collider[] explosionObjs;
+
 	// Use this for initialization
 	void Start () {
         overlappingObjects = new List<Explodable>();
@@ -25,6 +31,8 @@ public class Explosive : MonoBehaviour {
         exBound = GetComponent<SphereCollider>();
         exBound.radius = explosionRadius;
         exBound.enabled = false;
+
+        effects = GetComponents<ExplosionEffect>();
 	}
 	
 	// Update is called once per frame
@@ -52,15 +60,13 @@ public class Explosive : MonoBehaviour {
     public void Explode()
     {
         exBound.enabled = true;
-
-        Collider[] objs = Physics.OverlapSphere(transform.position, explosionRadius);
         hasExploded = true;
-        foreach (Collider c in objs)
-            if (c.gameObject.GetComponent<Explodable>() != null)
-                c.gameObject.GetComponent<Explodable>().Explode(explosionDelay);
 
-        //foreach (Explodable e in overlappingObjects)
-        //    if(e) e.Explode(explosionDelay);
+        explosionObjs = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach(ExplosionEffect e in effects)
+        {
+            e.Effect();
+        }
 
         if (GetComponent<Explodable>() && !GetComponent<Explodable>().hasExploded)
             GetComponent<Explodable>().Explode();
