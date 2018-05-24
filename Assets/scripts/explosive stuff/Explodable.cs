@@ -21,10 +21,16 @@ public class Explodable : MonoBehaviour {
     public bool destroyOnExplode = true;
     public float explosionEffectScale = 1;
 
+    //How long the explodable will wait before exploding.
+    public float preDelay = 0;
+
     public ObjLevelData data;
     private LevelManager level;
 
     public ExplodableData explodableData;
+
+    //Effects that happen during the pre-delay
+    ExplosionEffect[] preEffects;
 
     private void OnDestroy()
     {
@@ -49,7 +55,7 @@ public class Explodable : MonoBehaviour {
 
     private IEnumerator delayExplode(float sec)
     {
-        yield return new WaitForSeconds(sec);
+        yield return new WaitForSeconds(sec + preDelay);
 
         //if its a bomb then blow up
         if (GetComponent<Explosive>() && !GetComponent<Explosive>().hasExploded)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Launch : ExplosionEffect {
 
+    //How powerful the launch is.  Set to negative to suck things in.
     public float LaunchPower;
     //Force falloff?
 

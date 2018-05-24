@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosive: {fileID: 0}
+  explodeState: 2
 --- !u!114 &114142034920698860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosive: {fileID: 0}
+  explodeState: 2
   LaunchPower: 500
 --- !u!114 &114747507551619264
 MonoBehaviour:
@@ -186,6 +188,7 @@ MonoBehaviour:
   hasExploded: 0
   destroyOnExplode: 1
   explosionEffectScale: 2
+  preDelay: 0
   data:
     displayName: 
     idx: 0
