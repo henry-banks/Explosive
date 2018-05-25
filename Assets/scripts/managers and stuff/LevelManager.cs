@@ -19,6 +19,7 @@ public class ObjLevelData
 
 public class LevelManager : MonoBehaviour {
 
+    public VictoryScript victory;
     public List<ObjLevelData> placeableObjects;
 
 	// Use this for initialization
@@ -30,7 +31,7 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        StartCoroutine(victory.VictoryCheck());
 	}
 
 

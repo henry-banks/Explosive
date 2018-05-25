@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1984366810535516}
+  m_IsPrefabParent: 1
+--- !u!1 &1984366810535516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4587358643971438}
+  - component: {fileID: 114680710826826320}
+  - component: {fileID: 114581912355951162}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4587358643971438
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984366810535516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.6689334, y: 2.3332186, z: 1.3128961}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114581912355951162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984366810535516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619bf46fb2dd8384ab24a922c5474f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextLevelName: 
+  CheckDelay: 0.2
+  PostVictoryDelay: 2
+  isVictory: 0
+--- !u!114 &114680710826826320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984366810535516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1232d6680b36a46bdb70b7d949fb11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  victory: {fileID: 114581912355951162}
+  placeableObjects:
+  - displayName: Start Bomb
+    idx: 0
+    obj: {fileID: 1576602970179872, guid: 6dd10bb090f5c1541ae278fc0c6db821, type: 2}
+    maxUsed: 5
+    currentUsed: 0
+    thumbnail: {fileID: 0}
+  - displayName: Basic Bomb
+    idx: 0
+    obj: {fileID: 1608302201309978, guid: cbf93be9504a63546930068961b56b9c, type: 2}
+    maxUsed: 10
+    currentUsed: 0
+    thumbnail: {fileID: 0}
+  - displayName: LaunchBomb
+    idx: 0
+    obj: {fileID: 1400043047852154, guid: 8fa389ff0b91df14990cd6eca168d34a, type: 2}
+    maxUsed: 5
+    currentUsed: 0
+    thumbnail: {fileID: 0}
+  - displayName: SlowBomb
+    idx: 0
+    obj: {fileID: 1634181056491900, guid: d6a45c2aa238ae04bba44069a27464a3, type: 2}
+    maxUsed: 5
+    currentUsed: 0
+    thumbnail: {fileID: 0}
+  - displayName: PullBomb
+    idx: 0
+    obj: {fileID: 1400043047852154, guid: 1e851d8d92af3b24a8f166809038917c, type: 2}
+    maxUsed: 5
+    currentUsed: 0
+    thumbnail: {fileID: 0}
+  - displayName: Barrel
+    idx: 0
+    obj: {fileID: 1980086429967524, guid: d62d88e7e4feac4498b48a46a31a97b9, type: 2}
+    maxUsed: 20
+    currentUsed: 0
+    thumbnail: {fileID: 0}

@@ -16,7 +16,7 @@ public abstract class ExplosionEffect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        explosive = GetComponent<Explosive>();
+        if(GetComponent<Explosive>()) explosive = GetComponent<Explosive>();
 	}
 
     public abstract void Effect();
