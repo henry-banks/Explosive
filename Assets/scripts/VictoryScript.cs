@@ -23,7 +23,6 @@ public abstract class VictoryScript : MonoBehaviour {
         Debug.Log("Victory!");
     }
 
-
     public IEnumerator VictoryCheck()
     {
         yield return new WaitForSeconds(CheckDelay);
