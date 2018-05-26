@@ -13,6 +13,9 @@ public abstract class VictoryScript : MonoBehaviour {
 
     //True if win
     public bool isVictory;
+
+    //Make sure effect is only called once.
+    private bool effectRun = false;
     
     //A check that, if returned true, will congratulate the player and transition to the next level.
     protected abstract bool VictoryCondition();
@@ -30,7 +33,12 @@ public abstract class VictoryScript : MonoBehaviour {
         if (!isVictory)
         {
             isVictory = VictoryCondition();
+        }
+        else if(isVictory && !effectRun)
+        {
             //Also only call this once.
+            effectRun = true;
+
             VictoryEffect();
             StartCoroutine(DelayedLevelTransition());
         }

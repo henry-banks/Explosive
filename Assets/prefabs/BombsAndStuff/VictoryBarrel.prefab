@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosive: {fileID: 0}
-  explodeState: 2
+  explodeState: 3
   victory: {fileID: 0}
 --- !u!114 &114726860379357392
 MonoBehaviour:

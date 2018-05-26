@@ -113,25 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &142949836 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1456188227521460, guid: f627361a9414cb446b599f70069e9600,
-    type: 2}
-  m_PrefabInternal: {fileID: 892306975}
---- !u!114 &142949837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 142949836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 234fc88b0844afa478f1140738fda93b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosive: {fileID: 0}
-  explodeState: 2
-  victory: {fileID: 1004481702}
 --- !u!1001 &301364191
 Prefab:
   m_ObjectHideFlags: 0
@@ -480,6 +461,11 @@ Prefab:
       propertyPath: m_Name
       value: VictoryBarrel (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114473306419502898, guid: f627361a9414cb446b599f70069e9600,
+        type: 2}
+      propertyPath: victory
+      value: 
+      objectReference: {fileID: 1004481702}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f627361a9414cb446b599f70069e9600, type: 2}
   m_IsPrefabParent: 0
@@ -532,6 +518,11 @@ Prefab:
       propertyPath: m_Name
       value: VictoryBarrel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114473306419502898, guid: f627361a9414cb446b599f70069e9600,
+        type: 2}
+      propertyPath: victory
+      value: 
+      objectReference: {fileID: 1004481702}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f627361a9414cb446b599f70069e9600, type: 2}
   m_IsPrefabParent: 0
@@ -541,25 +532,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 892306975}
   m_Script: {fileID: 11500000, guid: 7321f0d9e88162a4895707f2e858b985, type: 3}
---- !u!1 &912391245 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1456188227521460, guid: f627361a9414cb446b599f70069e9600,
-    type: 2}
-  m_PrefabInternal: {fileID: 672968978}
---- !u!114 &912391246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 912391245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 234fc88b0844afa478f1140738fda93b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosive: {fileID: 0}
-  explodeState: 2
-  victory: {fileID: 1004481702}
 --- !u!114 &1004481702 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114581912355951162, guid: 707d4cbdd69d2d94d9b7128a2f547983,

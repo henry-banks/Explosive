@@ -30,16 +30,25 @@ public class Explodable : MonoBehaviour {
     public ExplodableData explodableData;
 
     //Effects that happen during the pre-delay
-    ExplosionEffect[] preEffects;
+    List<ExplosionEffect> preEffects;
 
-    private void OnDestroy()
-    {
-        level.placeableObjects[data.idx].currentUsed--;
-    }
+    //Effects that happen RIGHT before death
+    List<ExplosionEffect> deathEffects;
+
 
     // Use this for initialization
     void Start () {
         level = GameManager.Instance.levelManager;
+
+        preEffects = new List<ExplosionEffect>();
+        deathEffects = new List<ExplosionEffect>();
+        foreach(ExplosionEffect e in GetComponents<ExplosionEffect>())
+        {
+            if (e.explodeState == EffectState.PREDELAY)
+                preEffects.Add(e);
+            if (e.explodeState == EffectState.PREDEATH)
+                deathEffects.Add(e);
+        }
 	}
 	
 	// Update is called once per frame
@@ -55,6 +64,10 @@ public class Explodable : MonoBehaviour {
 
     private IEnumerator delayExplode(float sec)
     {
+        if(preEffects.Count > 0)
+            foreach (ExplosionEffect e in preEffects)
+                e.Effect();
+
         yield return new WaitForSeconds(sec + preDelay);
 
         //if its a bomb then blow up
@@ -64,6 +77,10 @@ public class Explodable : MonoBehaviour {
 
         GameObject g = Instantiate(explosion, transform.position, transform.rotation);
         g.transform.localScale *= explosionEffectScale;
+
+        if(deathEffects.Count > 0)
+            foreach (ExplosionEffect e in deathEffects)
+                e.Effect();
 
         if (destroyOnExplode)
         {
@@ -84,5 +101,10 @@ public class Explodable : MonoBehaviour {
     private IEnumerator generalDelay(float wait)
     {
         yield return new WaitForSeconds(wait);
+    }
+
+    private void OnDestroy()
+    {
+        level.placeableObjects[data.idx].currentUsed--;
     }
 }

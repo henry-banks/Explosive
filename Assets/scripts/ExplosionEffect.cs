@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EffectState
 {
-    IMMEDIATE,PREDELAY,EXPLOSION
+    IMMEDIATE,PREDELAY,EXPLOSION,PREDEATH
 };
 
 [RequireComponent(typeof(Explodable))]
