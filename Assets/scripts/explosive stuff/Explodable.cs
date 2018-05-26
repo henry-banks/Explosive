@@ -56,27 +56,24 @@ public class Explodable : MonoBehaviour {
 		
 	}
 
-    public void Explode(float preDelay = 0)
+    public void Explode(float preDelay = 0, bool ignoreDelay = false)
     {
-        StartCoroutine(delayExplode(preDelay));        
+        StartCoroutine(delayExplode(preDelay, ignoreDelay));        
     }
 
 
-    private IEnumerator delayExplode(float sec)
+    private IEnumerator delayExplode(float sec, bool ignoreDelay)
     {
         if(preEffects.Count > 0)
             foreach (ExplosionEffect e in preEffects)
                 e.Effect();
 
-        yield return new WaitForSeconds(sec + preDelay);
+        if(!ignoreDelay)
+            yield return new WaitForSeconds(sec + preDelay);
 
         //if its a bomb then blow up
         if (GetComponent<Explosive>() && !GetComponent<Explosive>().hasExploded)
-        { GetComponent<Explosive>().Explode(); }
-            
-
-        GameObject g = Instantiate(explosion, transform.position, transform.rotation);
-        g.transform.localScale *= explosionEffectScale;
+        { GetComponent<Explosive>().Explode(); }        
 
         if(deathEffects.Count > 0)
             foreach (ExplosionEffect e in deathEffects)
@@ -84,6 +81,9 @@ public class Explodable : MonoBehaviour {
 
         if (destroyOnExplode)
         {
+            GameObject g = Instantiate(explosion, transform.position, transform.rotation);
+            g.transform.localScale *= explosionEffectScale;
+
             Destroy(gameObject);
         }
     }

@@ -4,19 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
-
+//Place on an empty object in the upper-left corner of the canvas.
 public class BombList : MonoBehaviour {
 
     public LevelManager levelManager;
     public GameObject buttonTemplate;
 
+    //Padding between each button
+    public Vector2 padding = new Vector2(20,0);
+
 	// Use this for initialization
 	void Start () {
         //make a button for every placeable object
-		foreach(ObjLevelData e in levelManager.placeableObjects)
+		for(int i = 0; i < levelManager.placeableObjects.Count; i++)
         {
+            ObjLevelData e = levelManager.placeableObjects[i];
             //Make a new button
             GameObject newButton = Instantiate(buttonTemplate, transform, false);
+            RectTransform rt = buttonTemplate.GetComponent<RectTransform>();
+
+            //Transform it
+            newButton.GetComponent<RectTransform>().Translate(new Vector3(((rt.rect.width * i) + (padding.x * (i+1))) + (rt.rect.width / 2), -((rt.rect.height) + padding.y)));
 
             //Set up bomb select script
             uiBombSelect ubs = newButton.GetComponent<uiBombSelect>();

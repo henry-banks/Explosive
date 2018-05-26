@@ -240,7 +240,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1703943772118580}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -349,6 +349,7 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   buttonTemplate: {fileID: 1291316543201576, guid: d6354d68a77db4e46bbf71b1eaf8a7bc,
     type: 2}
+  padding: {x: 20, y: 0}
 --- !u!222 &222087012700702188
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -427,8 +428,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 0, y: 75}
+  m_AnchoredPosition: {x: 0, y: -28.75}
+  m_SizeDelta: {x: 0, y: 57.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224265499601764774
 RectTransform:
@@ -464,10 +465,10 @@ RectTransform:
   m_Father: {fileID: 224265499601764774}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224550979336607030
 RectTransform:

@@ -30,7 +30,7 @@ GameObject:
   - component: {fileID: 120530145849111716}
   - component: {fileID: 114778140866370952}
   - component: {fileID: 114526724854683222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BasicBomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}
@@ -59,11 +59,9 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 2ade8d120d9d03545afc43aa0c30a1ae, type: 2}
   m_StaticBatchInfo:
@@ -76,7 +74,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -131,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRadius: 5
-  explosionDelay: 0.25
+  explosionDelay: 0
   hasExploded: 0
   explosionObjs: []
 --- !u!114 &114526724854683222
@@ -190,7 +187,7 @@ MonoBehaviour:
   hasExploded: 0
   destroyOnExplode: 1
   explosionEffectScale: 2
-  preDelay: 0
+  preDelay: 0.25
   data:
     displayName: 
     idx: 0
@@ -207,11 +204,9 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 2
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 0}
   m_StaticBatchInfo:
@@ -224,7 +219,6 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -242,15 +236,12 @@ LineRenderer:
     widthCurve:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 3
+      - serializedVersion: 2
         time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

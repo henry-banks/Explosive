@@ -57,11 +57,13 @@ public class Explosive : MonoBehaviour {
                 overlappingObjects.Add(other.gameObject.GetComponent<Explodable>());
     }
 
-    public void Explode()
+    public void Explode(bool ignoreDelay = false)
     {
+        //Let everyone know we've EXPLODED!
         exBound.enabled = true;
         hasExploded = true;
 
+        //Get all the other things we're exploding.
         explosionObjs = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach(ExplosionEffect e in effects)
         {
@@ -69,7 +71,7 @@ public class Explosive : MonoBehaviour {
         }
 
         if (GetComponent<Explodable>() && !GetComponent<Explodable>().hasExploded)
-            GetComponent<Explodable>().Explode();
+            GetComponent<Explodable>().Explode(0,ignoreDelay);
     }
 
     public void OnDestroy()
