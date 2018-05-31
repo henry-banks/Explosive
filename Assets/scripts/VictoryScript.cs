@@ -7,7 +7,7 @@ public abstract class VictoryScript : MonoBehaviour {
 
     public string NextLevelName;
     //How often to check for a victory.  Set to larger values if the check is complex.
-    public float CheckDelay = 0.2f;
+    public float CheckDelay = 0f;
     //A delay after victory is met and before the actual level transition in which the Victory effect can be seen;
     public float PostVictoryDelay = 2f;
 

@@ -25,7 +25,9 @@ public class LevelManager : MonoBehaviour {
 
     public bool isWin { get {
             foreach (VictoryScript v in victories)
-            { if (!v.isVictory) return false; }
+            {
+                StartCoroutine(v.VictoryCheck());
+                if (!v.isVictory) return false; }
             return true;
                 } }
 
@@ -55,7 +57,7 @@ public class LevelManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        
+        StartCoroutine(delayVictoryCheck());
 	}
 
 
