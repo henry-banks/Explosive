@@ -11,6 +11,36 @@ public struct ExplodableData
 
 }
 
+//used to pause/unpause.  Stores rigidbody values so they can be reset later.
+public struct PauseData
+{
+    float oMass;
+    Vector3 oVelocity;
+    Vector3 oAngularVelocity;
+    bool oGravity;
+    bool oKinematic;
+
+    //Saves state of the rigidbody.
+    public void Save(Rigidbody rb)
+    {
+        oMass = rb.mass;
+        oVelocity = rb.velocity;
+        oAngularVelocity = rb.angularVelocity;
+        oGravity = rb.useGravity;
+        oKinematic = rb.isKinematic;
+    }
+
+    //Restores rigidbody to the stored state.
+    public void Load(Rigidbody rb)
+    {
+        rb.mass = oMass;
+        rb.velocity = oVelocity;
+        rb.angularVelocity = oAngularVelocity;
+        rb.useGravity = oGravity;
+        rb.isKinematic = oKinematic;
+    }
+}
+
 public class Explodable : MonoBehaviour {
 
     public GameObject explosion;
@@ -28,6 +58,7 @@ public class Explodable : MonoBehaviour {
     private LevelManager level;
 
     public ExplodableData explodableData;
+    public PauseData pauseData;
 
     //Effects that happen during the pre-delay
     List<ExplosionEffect> preEffects;
@@ -37,6 +68,9 @@ public class Explodable : MonoBehaviour {
 
     //Whether or not this can be removed by player
     public bool removable = false;
+
+    //Used to toggle pause/unpause;
+    bool paused = false;
 
     //Slowdown Stuff
     bool first = true;
@@ -90,11 +124,38 @@ public class Explodable : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if (changeTimeScale)
+	void FixedUpdate () {
+
+        //Stuff to change when the level is paused
+        if(level.isPaused)
         {
-            rb.velocity *= timeScale;
-            rb.angularVelocity *= timeScale;
+            //If we were not previously paused, save state.
+            if (!paused)
+            {
+                pauseData.Save(rb);
+                paused = true;
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.mass = 0;
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
+        //Vs. not paused.
+        else
+        {
+            //If we were previously paused, restore to unpaused state.
+            if(paused)
+            {
+                pauseData.Load(rb);
+                paused = false;
+            }
+            if (changeTimeScale)
+            {
+                rb.velocity *= timeScale;
+                rb.angularVelocity *= timeScale;
+            }
         }
     }
 
@@ -106,6 +167,12 @@ public class Explodable : MonoBehaviour {
 
     private IEnumerator delayExplode(float sec, bool ignoreDelay)
     {
+        //Do not explode if paused.
+        while(level.isPaused)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         if(preEffects.Count > 0)
             foreach (ExplosionEffect e in preEffects)
                 e.Effect();

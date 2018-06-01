@@ -59,19 +59,34 @@ public class Explosive : MonoBehaviour {
 
     public void Explode(bool ignoreDelay = false)
     {
-        //Let everyone know we've EXPLODED!
         exBound.enabled = true;
-        hasExploded = true;
 
-        //Get all the other things we're exploding.
-        explosionObjs = Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach(ExplosionEffect e in effects)
+        //Only do this if we haven't exploded yet.  Prevents multi-fires
+        if (!hasExploded)
+        {
+            //Get all the other things we're exploding.
+            explosionObjs = Physics.OverlapSphere(transform.position, explosionRadius);
+            StartCoroutine(explodeAfterPause(ignoreDelay));
+        }
+
+        //Let everyone know we've EXPLODED!
+        hasExploded = true;
+    }
+
+    private IEnumerator explodeAfterPause(bool ignoreDelay)
+    {
+        //Do not explode while paused.
+        //I use WaitForFixedUpdate here because sometimes the effect will update physics.
+        while (GameManager.Instance.levelManager.isPaused)
+            yield return new WaitForFixedUpdate();
+
+        foreach (ExplosionEffect e in effects)
         {
             e.Effect();
         }
 
         if (GetComponent<Explodable>() && !GetComponent<Explodable>().hasExploded)
-            GetComponent<Explodable>().Explode(0,ignoreDelay);
+            GetComponent<Explodable>().Explode(0, ignoreDelay);
     }
 
     public void OnDestroy()

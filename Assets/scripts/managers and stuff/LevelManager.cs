@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour {
     public List<VictoryScript> victories;
     public List<ObjLevelData> placeableObjects;
     public bool customVictories = false;
+    //If true, pause all rigidbody movement.
+    public bool isPaused = false;
 
     public bool isWin { get {
             foreach (VictoryScript v in victories)
