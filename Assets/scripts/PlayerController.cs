@@ -11,13 +11,32 @@ public class PlayerController : MonoBehaviour {
     //How much heigher to place objects.    
     public float heightOffset = 0.5f;
 
+    public float speed = 5f;
+    public float rotSpeed = 5f;
+
+    //Arbitrary locations for the camera to go to.
+    public List<Transform> cameraLocations;
+    public int cameraLocIdx = 0;
+
+    public Transform currentLoc { get { return cameraLocations[cameraLocIdx]; } }
+
     //Tap stuff
     private int tapCount = 0;
     private float doubleTapTimer = 0.0f;
     private float doubleTapTimeout = 0.5f;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        //make sure cameraLocations is populated
+        if (cameraLocations.Count <= 0)
+        {
+            cameraLocations.Add(transform);
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
+
         manager = GameManager.Instance;
 	}
 
@@ -46,6 +65,28 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
+
+        transform.position = Vector3.Lerp(transform.position, currentLoc.position, 0.3f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, currentLoc.rotation, 0.2f);
+
+        //NO ACTUAL CAMERA MOVE.
+
+        //If middle mouse is held, WASD rotates.
+        //if(Input.GetMouseButtonDown(2))
+        //{
+        //    float pitch = Input.GetAxis("Vertical") * Time.deltaTime * rotSpeed;
+        //    float yaw = Input.GetAxis("Horizontal") * Time.deltaTime * rotSpeed;
+
+        //    transform.Rotate(new Vector3(pitch, yaw, 0));
+        //}
+        //else
+        //{
+        //    transform.Translate(transform.forward * Input.GetAxis("Vertical") * Time.deltaTime * speed);
+        //    transform.Translate(transform.right * Input.GetAxis("Horizontal") * Time.deltaTime * speed);
+        //}
+
+        //float vertical = Input.GetAxis("UpDown") * Time.deltaTime * speed;
+        //transform.Translate(0, vertical, 0, Space.World);
 
         //IF THERE IS A POKE.
         //if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
