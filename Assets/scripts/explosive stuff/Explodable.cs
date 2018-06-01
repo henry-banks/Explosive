@@ -35,6 +35,44 @@ public class Explodable : MonoBehaviour {
     //Effects that happen RIGHT before death
     List<ExplosionEffect> deathEffects;
 
+    //Whether or not this can be removed by player
+    public bool removable = false;
+
+    //Slowdown Stuff
+    bool first = true;
+    private Rigidbody rb;
+
+    private float _timeScale = 1;
+    public float timeScale
+    {
+        get { return _timeScale; }
+        set
+        {
+            if (rb == null)
+                return;
+            if (!first)
+            {
+                rb.mass *= timeScale;
+                //rb.velocity /= timeScale;
+                //rb.angularVelocity /= timeScale;
+            }
+            first = false;
+            //changeTimeScale = true;
+
+            _timeScale = Mathf.Abs(value);
+
+            rb.mass /= timeScale;
+            //rb.velocity *= timeScale;
+            //rb.angularVelocity *= timeScale;
+        }
+    }
+    private bool changeTimeScale = false;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        timeScale = _timeScale;
+    }
 
     // Use this for initialization
     void Start () {
@@ -53,8 +91,12 @@ public class Explodable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (changeTimeScale)
+        {
+            rb.velocity *= timeScale;
+            rb.angularVelocity *= timeScale;
+        }
+    }
 
     public void Explode(float preDelay = 0, bool ignoreDelay = false)
     {
@@ -90,13 +132,17 @@ public class Explodable : MonoBehaviour {
 
     public void SlowDown(float slowAmount, float slowCooldown)
     {
-        Rigidbody r = GetComponent<Rigidbody>();
-        float originalDrag = r.drag;
-        r.drag = slowAmount;
+        float originalTimeScale = timeScale;
+        timeScale = slowAmount;
+        changeTimeScale = true;
 
         StartCoroutine(generalDelay(slowCooldown));
 
-        r.drag = originalDrag;
+        rb.velocity /= timeScale;
+        rb.angularVelocity /= timeScale;
+
+        changeTimeScale = false;
+        timeScale = originalTimeScale;
     }
     private IEnumerator generalDelay(float wait)
     {

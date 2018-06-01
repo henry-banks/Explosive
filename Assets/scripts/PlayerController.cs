@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
             if (mouse.objHit && !EventSystem.current.IsPointerOverGameObject())
             {
                 //If we clicked a bomb, delete it.
-                if (mouse.objHit.GetComponent<Explodable>())
+                if (mouse.objHit.GetComponent<Explodable>() && mouse.objHit.GetComponent<Explodable>().removable)
                 {
                     Destroy(mouse.objHit);
                 }
@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour {
             //+ new Vector3(0,2,0)
             GameObject thing = Instantiate(manager.thingToPlace, place.position + new Vector3(0,heightOffset + manager.thingToPlace.GetComponent<Renderer>().bounds.size.y), new Quaternion());
             thing.GetComponent<Explodable>().data = data;
+            thing.GetComponent<Explodable>().removable = true;
             Debug.Log("spawned " + manager.thingToPlace.name);
         }
         else Debug.Log("Not enough" + manager.thingToPlace.name);

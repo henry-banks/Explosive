@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*https://answers.unity.com/questions/711749/slow-time-for-a-single-rigid-body.html */
+
 public class SlowDown : ExplosionEffect {
 
     //Percentage from 0-100.  100 means total freeze.
@@ -15,8 +17,7 @@ public class SlowDown : ExplosionEffect {
         {
             if(e.GetComponent<Explodable>())
             {
-                e.GetComponent<Rigidbody>().drag = slowAmount;
-                e.GetComponent<Explodable>().SlowDown(slowAmount, slowTime);
+                e.GetComponent<Explodable>().SlowDown(1/slowAmount, slowTime);
             }
         }
     }
