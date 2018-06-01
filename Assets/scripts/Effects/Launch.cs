@@ -19,13 +19,11 @@ public class Launch : ExplosionEffect {
             //Debug.DrawRay(transform.position, dir * 1000, Color.red, 50f);
             if (e.GetComponent<Explodable>())
             {
-                
+
                 //if (Physics.Raycast(transform.position, dir, out hit))
                 //I was going to put the addforce into the if but it didn't work.
-                if (e.GetComponent<Collider>().Raycast(ray, out hit, Mathf.Infinity))
-                {
-                }
-                    e.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * LaunchPower, hit.point);
+                e.GetComponent<Collider>().Raycast(ray, out hit, Mathf.Infinity);
+                e.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * LaunchPower, hit.point);
                 //else
                 //{
                 //    e.GetComponent<Rigidbody>().AddForceAtPosition(-(dir) * LaunchPower, transform.position);
