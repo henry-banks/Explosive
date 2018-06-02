@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Explodes things it hits.
 public class Chain : ExplosionEffect {
 
     public float explosionDelay = 0.25f;

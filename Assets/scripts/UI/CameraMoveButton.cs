@@ -8,6 +8,12 @@ public class CameraMoveButton : MonoBehaviour {
     public bool isLeft = false;
     public PlayerController pc;
 
+    private void Update()
+    {
+        if (!pc)
+            pc = FindObjectOfType<PlayerController>();
+    }
+
     public void Move()
     {
         if(isLeft)

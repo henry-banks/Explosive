@@ -47,6 +47,9 @@ public class BombList : MonoBehaviour {
     //Switch to something else if lag happens
     private void Update()
     {
+        if (!levelManager)
+            levelManager = GameManager.Instance.levelManager;
+
         for (int i = 0; i < levelManager.placeableObjects.Count; i++)
         {
             ObjLevelData e = levelManager.placeableObjects[i];

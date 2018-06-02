@@ -8,7 +8,7 @@ public class pauseButton : MonoBehaviour {
     public Text pauseText;
     bool localPause = false;
 
-    public LevelManager lm = GameManager.Instance.levelManager;
+    public LevelManager lm;
 
     public void Toggle()
     {

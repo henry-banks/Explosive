@@ -2,15 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Variables that are modified by various explosion effects
-public struct ExplodableData
-{
-    //Speed at which the object moves, either by itself or from being blown away.
-    float moveSpeed;
-
-
-}
-
 //used to pause/unpause.  Stores rigidbody values so they can be reset later.
 public struct PauseData
 {
@@ -57,7 +48,6 @@ public class Explodable : MonoBehaviour {
     public ObjLevelData data;
     private LevelManager level;
 
-    public ExplodableData explodableData;
     public PauseData pauseData;
 
     //Effects that happen during the pre-delay
@@ -104,12 +94,13 @@ public class Explodable : MonoBehaviour {
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        timeScale = _timeScale;
+        
     }
 
     // Use this for initialization
     void Start () {
+        rb = GetComponent<Rigidbody>();
+        timeScale = _timeScale;
         level = GameManager.Instance.levelManager;
 
         preEffects = new List<ExplosionEffect>();
@@ -122,9 +113,19 @@ public class Explodable : MonoBehaviour {
                 deathEffects.Add(e);
         }
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    private void Update()
+    {
+        if (!rb && GetComponent<Rigidbody>())
+        {
+            rb = GetComponent<Rigidbody>();
+            timeScale = _timeScale;
+        }
+        if (!level) level = GameManager.Instance.levelManager;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
 
         //Stuff to change when the level is paused
         if(level.isPaused)
@@ -168,31 +169,37 @@ public class Explodable : MonoBehaviour {
     private IEnumerator delayExplode(float sec, bool ignoreDelay)
     {
         //Do not explode if paused.
-        while(level.isPaused)
+        if (level.isPaused)
         {
             yield return new WaitForEndOfFrame();
         }
 
-        if(preEffects.Count > 0)
+        //Execute all pre-explosion effects
+        if (preEffects.Count > 0)
             foreach (ExplosionEffect e in preEffects)
                 e.Effect();
 
-        if(!ignoreDelay)
+        //Do the delay unless we're explicitly ignoring the delay
+        if (!ignoreDelay)
             yield return new WaitForSeconds(sec + preDelay);
 
         //if its a bomb then blow up
         if (GetComponent<Explosive>() && !GetComponent<Explosive>().hasExploded)
         { GetComponent<Explosive>().Explode(); }        
 
+        //Execute all pre-death(post-explosion? effects
         if(deathEffects.Count > 0)
             foreach (ExplosionEffect e in deathEffects)
                 e.Effect();
 
+        //If we destroy on explosion...
         if (destroyOnExplode)
         {
+            //Make an explosion
             GameObject g = Instantiate(explosion, transform.position, transform.rotation);
             g.transform.localScale *= explosionEffectScale;
 
+            //DIE.
             Destroy(gameObject);
         }
     }

@@ -17,7 +17,10 @@ public class GameManager : MonoBehaviour {
             Destroy(this.gameObject);
         else
             _instance = this;
+    }
 
+    private void Start()
+    {
         levelManager = FindObjectOfType <LevelManager>();
     }
 

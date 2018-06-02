@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour {
     public float speed = 5f;
     public float rotSpeed = 5f;
 
+    //If this is used, anything in the cameraLocations List will be overridden.
+    public GameObject cameraLocOverride;
+
     //Arbitrary locations for the camera to go to.
     public List<Transform> cameraLocations;
     public int cameraLocIdx = 0;
@@ -32,17 +35,25 @@ public class PlayerController : MonoBehaviour {
         {
             cameraLocations.Add(transform);
         }
+
+        //If there's a Camera Locations Override, use its children to populate the camera locations.
+        if(cameraLocOverride)
+        {
+            cameraLocations.Clear();
+
+            for(int i = 0; i < cameraLocOverride.transform.childCount; i++)
+            {
+                cameraLocations.Add(cameraLocOverride.transform.GetChild(i));
+            }
+        }
     }
-
-    // Use this for initialization
-    void Start () {
-
-        manager = GameManager.Instance;
-	}
 
     // Update is called once per frame
     void Update()
     {
+        if (!manager)
+            manager = GameManager.Instance;
+
         //click - buggy on android?
         if(Input.GetMouseButtonUp(0))
         {

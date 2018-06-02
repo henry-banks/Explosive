@@ -15,7 +15,10 @@ public class Victory_blowup : ExplosionEffect {
 
     public override void Effect()
     {
-        if(!hasThingBeenDone)
+        if (!hasThingBeenDone)
+        {
             victory.blownUpCount++;
+            hasThingBeenDone = true;
+        }
     }
 }

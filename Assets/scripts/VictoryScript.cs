@@ -20,10 +20,17 @@ public abstract class VictoryScript : MonoBehaviour {
     //A check that, if returned true, will congratulate the player and transition to the next level.
     protected abstract bool VictoryCondition();
 
+    public LevelManager lm;
+
     //Effect that is played when the victory condition is met.
     public virtual void VictoryEffect()
     {
         Debug.Log("Victory!");
+    }
+
+    private void Update()
+    {
+        if (!lm) lm = GameManager.Instance.levelManager;
     }
 
     public IEnumerator VictoryCheck()
@@ -46,7 +53,14 @@ public abstract class VictoryScript : MonoBehaviour {
 
     private IEnumerator DelayedLevelTransition()
     {
+
         yield return new WaitForSeconds(PostVictoryDelay);
+
+        //Don't do anything if level is paused.
+        if (lm.isPaused)
+        {
+            yield return new WaitForEndOfFrame();
+        }
         LevelTransition();
     }
 

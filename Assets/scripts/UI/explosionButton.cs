@@ -7,7 +7,7 @@ public class explosionButton : MonoBehaviour {
 
     public Text eText;
 
-    public LevelManager lm = GameManager.Instance.levelManager;
+    public LevelManager lm;
     bool isExploding = false;
 
 	public void ExplodeEverything()

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ObjLevelData
 {
     public string displayName;
-    public int idx;
+    public int idx = -1;
     public GameObject obj;
     public int maxUsed;
     public int currentUsed;
