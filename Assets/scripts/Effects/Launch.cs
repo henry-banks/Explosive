@@ -10,6 +10,10 @@ public class Launch : ExplosionEffect {
 
     public override void Effect()
     {
+        //If we've exploded, DON'T DO THIS.
+        if (hasExploded)
+            return;
+
         foreach(Collider e in explosive.explosionObjs)
         {
             var dir = (e.transform.position - transform.position).normalized;
@@ -30,6 +34,7 @@ public class Launch : ExplosionEffect {
                 //}
             }
         }
+        hasExploded = true;
     }
 
 }

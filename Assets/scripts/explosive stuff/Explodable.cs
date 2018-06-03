@@ -32,6 +32,7 @@ public struct PauseData
     }
 }
 
+[RequireComponent(typeof(Rigidbody))]
 public class Explodable : MonoBehaviour {
 
     public GameObject explosion;
@@ -77,8 +78,8 @@ public class Explodable : MonoBehaviour {
             if (!first)
             {
                 rb.mass *= timeScale;
-                //rb.velocity /= timeScale;
-                //rb.angularVelocity /= timeScale;
+                rb.velocity /= timeScale;
+                rb.angularVelocity /= timeScale;
             }
             first = false;
             //changeTimeScale = true;
@@ -86,8 +87,8 @@ public class Explodable : MonoBehaviour {
             _timeScale = Mathf.Abs(value);
 
             rb.mass /= timeScale;
-            //rb.velocity *= timeScale;
-            //rb.angularVelocity *= timeScale;
+            rb.velocity *= timeScale;
+            rb.angularVelocity *= timeScale;
         }
     }
     private bool changeTimeScale = false;
@@ -152,11 +153,13 @@ public class Explodable : MonoBehaviour {
                 pauseData.Load(rb);
                 paused = false;
             }
-            if (changeTimeScale)
-            {
-                rb.velocity *= timeScale;
-                rb.angularVelocity *= timeScale;
-            }
+            //if (changeTimeScale)
+            //{
+            //    rb.velocity *= timeScale;
+            //    rb.angularVelocity *= timeScale;
+            //}
+
+            rb.velocity += Physics.gravity * (Time.deltaTime * timeScale);
         }
     }
 
@@ -220,11 +223,17 @@ public class Explodable : MonoBehaviour {
     }
     private IEnumerator generalDelay(float wait)
     {
+        //PAUSE.
+        while(level.isPaused)
+        {
+            yield return new WaitForEndOfFrame();
+        }
         yield return new WaitForSeconds(wait);
     }
 
     private void OnDestroy()
     {
-        level.placeableObjects[data.idx].currentUsed--;
+        if(data.idx >=0 )
+            level.placeableObjects[data.idx].currentUsed--;
     }
 }

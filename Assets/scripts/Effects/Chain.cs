@@ -11,6 +11,10 @@ public class Chain : ExplosionEffect {
 
     public override void Effect()
     {
+        //If we've exploded, DON'T DO THIS.
+        if (hasExploded)
+            return;
+
         foreach (Collider c in explosive.explosionObjs)
         {
 
@@ -25,5 +29,6 @@ public class Chain : ExplosionEffect {
                     c.gameObject.GetComponent<Explodable>().Explode(explosionDelay);
             }
         }
+        hasExploded = true;
     }
 }

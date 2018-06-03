@@ -12,13 +12,17 @@ public class SlowDown : ExplosionEffect {
 
     public override void Effect()
     {
+        //If we've exploded, DON'T DO THIS.
+        if (hasExploded)
+            return;
 
-        foreach(Collider e in explosive.explosionObjs)
+        foreach (Collider e in explosive.explosionObjs)
         {
             if(e.GetComponent<Explodable>())
             {
                 e.GetComponent<Explodable>().SlowDown(1/slowAmount, slowTime);
             }
         }
+        hasExploded = true;
     }
 }

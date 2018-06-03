@@ -14,6 +14,9 @@ public abstract class ExplosionEffect : MonoBehaviour {
     //When to start the effect
     public EffectState explodeState = EffectState.EXPLOSION;
 
+    //Makes sure effect is done only once.
+    protected bool hasExploded = false;
+
 	// Use this for initialization
 	void Start () {
         if(GetComponent<Explosive>()) explosive = GetComponent<Explosive>();
