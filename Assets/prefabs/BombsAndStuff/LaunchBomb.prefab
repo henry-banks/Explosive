@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosive: {fileID: 0}
   explodeState: 2
-  LaunchPower: 500
+  LaunchPower: 1000
 --- !u!114 &114747507551619264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,6 +194,7 @@ MonoBehaviour:
     maxUsed: 0
     currentUsed: 0
     thumbnail: {fileID: 0}
+  removable: 0
 --- !u!120 &120959699446041248
 LineRenderer:
   m_ObjectHideFlags: 1
