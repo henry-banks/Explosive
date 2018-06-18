@@ -129,6 +129,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouse: {fileID: 114076772950454928}
   manager: {fileID: 0}
+  heightOffset: 0.5
+  speed: 5
+  rotSpeed: 5
+  cameraLocOverride: {fileID: 0}
+  cameraLocations: []
+  cameraLocIdx: 0
+  testText: {fileID: 0}
+  doubleTapTimeout: 0.1
+  holdTimeMax: 1
+  moveThreshold: 100
 --- !u!124 &124627305495953208
 Behaviour:
   m_ObjectHideFlags: 1
