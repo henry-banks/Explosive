@@ -24,7 +24,7 @@ public class BombList : MonoBehaviour {
             RectTransform rt = buttonTemplate.GetComponent<RectTransform>();
 
             //Transform it
-            newButton.GetComponent<RectTransform>().Translate(new Vector3(((rt.rect.width * i) + (padding.x * (i+1))) + (rt.rect.width / 2), -((rt.rect.height) + padding.y)));
+            newButton.GetComponent<RectTransform>().Translate(new Vector3(((rt.rect.width * i) + (padding.x * (i + 1))) + (rt.rect.width / 2), 0)); //-((rt.rect.height) + padding.y)));
 
             //Set up bomb select script
             uiBombSelect ubs = newButton.GetComponent<uiBombSelect>();
@@ -42,7 +42,18 @@ public class BombList : MonoBehaviour {
             t.text = e.displayName + " - " + e.remaining;
 
         }
-	}
+        RectTransform tr = GetComponent<RectTransform>();
+        Rect r = tr.rect;
+        RectTransform childRt = tr.GetChild(tr.childCount - 1).GetComponent<RectTransform>();
+
+        tr.offsetMax = tr.offsetMax + new Vector2(((childRt.position.x + childRt.offsetMax.x)/2) - (padding.x/2), 0);
+
+        //r.xMin = tr.GetChild(0).GetComponent<RectTransform>().rect.xMin;
+        //r.yMin = tr.GetChild(0).GetComponent<RectTransform>().rect.yMin;
+        //r.yMax = tr.GetChild(0).GetComponent<RectTransform>().rect.yMax;
+        //r.xMax = tr.GetChild(tr.childCount - 1).GetComponent<RectTransform>().rect.xMax;
+
+    }
 
     //Switch to something else if lag happens
     private void Update()
@@ -50,6 +61,7 @@ public class BombList : MonoBehaviour {
         if (!levelManager)
             levelManager = GameManager.Instance.levelManager;
 
+        //Update text
         for (int i = 0; i < levelManager.placeableObjects.Count; i++)
         {
             ObjLevelData e = levelManager.placeableObjects[i];

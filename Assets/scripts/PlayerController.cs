@@ -84,8 +84,8 @@ public class PlayerController : MonoBehaviour {
         /*******************
           Standalone stuff
         *******************/
-//#if UNITY_STANDALONE
-#if UNITY_EDITOR
+#if UNITY_STANDALONE
+//#if UNITY_EDITOR
 
         //click - buggy on android?
         if (Input.GetMouseButtonUp(0))
@@ -141,8 +141,8 @@ public class PlayerController : MonoBehaviour {
                     //if we moved, see if we moved ENOUGH.
                     if(Mathf.Abs(mainTouch.deltaPosition.x) >= moveThreshold && canMove)
                     {
-                        //If we did, move the camera
-                        MoveCamera(mainTouch.deltaPosition.x > 0);
+                        //If we did, move the camera (if we're not over a UI)
+                        MoveCheck(mainTouch.deltaPosition.x > 0);
 
                         //Don't place object if we move the camera
                         placeObject = false;
@@ -177,40 +177,6 @@ public class PlayerController : MonoBehaviour {
 
         transform.position = Vector3.Lerp(transform.position, currentLoc.position, 0.3f);
         transform.rotation = Quaternion.Lerp(transform.rotation, currentLoc.rotation, 0.2f);
-
-        //NO ACTUAL CAMERA MOVE.
-
-        //If middle mouse is held, WASD rotates.
-        //if(Input.GetMouseButtonDown(2))
-        //{
-        //    float pitch = Input.GetAxis("Vertical") * Time.deltaTime * rotSpeed;
-        //    float yaw = Input.GetAxis("Horizontal") * Time.deltaTime * rotSpeed;
-
-        //    transform.Rotate(new Vector3(pitch, yaw, 0));
-        //}
-        //else
-        //{
-        //    transform.Translate(transform.forward * Input.GetAxis("Vertical") * Time.deltaTime * speed);
-        //    transform.Translate(transform.right * Input.GetAxis("Horizontal") * Time.deltaTime * speed);
-        //}
-
-        //float vertical = Input.GetAxis("UpDown") * Time.deltaTime * speed;
-        //transform.Translate(0, vertical, 0, Space.World);
-
-        //IF THERE IS A POKE.
-        //if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
-        //{
-        //    tapCount++;
-
-        //    if(tapCount > 0)
-        //    {
-        //        doubleTapTimer = doubleTapTimeout;
-        //    }
-        //    if(tapCount >= 2)
-        //    {
-
-        //    }
-        //}
 
     }
 
@@ -264,6 +230,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    protected void MoveCheck(bool isLeft)
+    {
+        if (mouse.objHit && !EventSystem.current.IsPointerOverGameObject())
+        {
+            //If we clicked the floor, place a bomb.
+            if (mouse.objHit.layer != 5)
+            { MoveCamera(isLeft); }
+        }
+    }
     public void MoveCamera(bool isLeft)
     {
         if (isLeft)
