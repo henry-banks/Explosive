@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get { return _instance; } }
 
     public GameObject thingToPlace;
+    public GameObject thingToEdit;
     public int thingIdx;
     public LevelManager levelManager;
 

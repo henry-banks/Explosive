@@ -5,8 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class CircleDraw : MonoBehaviour {
 
+    //Only used if there is not an explosive attached.
     public float radius;
     public int segments = 50;
+
+    float _radius { get
+        {
+            if (GetComponent<Explosive>()) return GetComponent<Explosive>().explosionRadius;
+            return radius;
+        } }
 
     LineRenderer line;
 
@@ -32,8 +39,8 @@ public class CircleDraw : MonoBehaviour {
 
         for(int i = 0; i < (segments+1); i++)
         {
-            x = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
-            z = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
+            x = Mathf.Sin(Mathf.Deg2Rad * angle) * _radius;
+            z = Mathf.Cos(Mathf.Deg2Rad * angle) * _radius;
 
             line.SetPosition(i, new Vector3(x + transform.position.x, 0, z + transform.position.z));
 

@@ -10,6 +10,12 @@ public class Explosive : MonoBehaviour {
     public float explosionRadius = 1;
     public float explosionDelay = 0.25f;
 
+    public float exRadius
+    {
+        get { return explosionRadius; }
+        set { GetComponent<SphereCollider>().radius = explosionRadius = value; }
+    }
+
     Rigidbody rb;
     SphereCollider exBound;
 
@@ -33,6 +39,8 @@ public class Explosive : MonoBehaviour {
         exBound.enabled = false;
 
         effects = GetComponents<ExplosionEffect>();
+
+        GetComponent<SphereCollider>().radius = explosionRadius;
 	}
 	
 	// Update is called once per frame

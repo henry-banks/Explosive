@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
     public MousePos mouse;
-    public GameManager manager;
+    public GameManager manager = GameManager.Instance;
 
     //How much heigher to place objects.    
     public float heightOffset = 0.5f;
@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour {
     public int cameraLocIdx = 0;
 
     public Transform currentLoc { get { return cameraLocations[cameraLocIdx]; } }
+
+    //Object we're editing.
+    public Explodable editObj;
 
     /* TAP LOGIC
      * ON TAP:
@@ -51,6 +54,8 @@ public class PlayerController : MonoBehaviour {
 
     bool placeObject = true;
 
+    public GameObject editMenu;
+
     //Shortcut
     Touch mainTouch { get { return Input.GetTouch(0); } }
 
@@ -72,6 +77,12 @@ public class PlayerController : MonoBehaviour {
                 cameraLocations.Add(cameraLocOverride.transform.GetChild(i));
             }
         }
+    }
+
+    private void Start()
+    {
+        //Turn off the edit menu.
+        editMenu.SetActive(false);       
     }
 
     // Update is called once per frame
@@ -212,8 +223,12 @@ public class PlayerController : MonoBehaviour {
         if (mouse.objHit && !EventSystem.current.IsPointerOverGameObject()
             && mouse.objHit.GetComponent<Explodable>() && mouse.objHit.GetComponent<Explodable>().removable)
         {
+            manager.thingToEdit = mouse.objHit;
+
             Debug.Log("Editing" + mouse.objHit.name);
             //edit stuff
+            editMenu.gameObject.SetActive(true);
+            editMenu.GetComponent<EditMenuScripts>().Refresh();
         }
     }
 
